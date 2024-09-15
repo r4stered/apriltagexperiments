@@ -32,7 +32,7 @@ macro(apriltagexperiments_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --suppress=${SUPPRESS_DIR})
     else()
       # if the user provides a CPPCHECK_OPTIONS with a template specified, it will override this template
-      set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --template=${CPPCHECK_TEMPLATE} ${CPPCHECK_OPTIONS})
+      set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --template=${CPPCHECK_TEMPLATE} ${CPPCHECK_OPTIONS} --include="${CMAKE_CURRENT_BINARY_DIR}/_deps/catch2-src/src/")
     endif()
 
     if(NOT
