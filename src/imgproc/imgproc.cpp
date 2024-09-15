@@ -1,4 +1,4 @@
-#include <apriltagexperiments/sample_library.hpp>
+#include <apriltagexperiments/imgproc.hpp>
 
 int factorial(int input) noexcept
 {
