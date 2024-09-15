@@ -17,6 +17,8 @@ macro(apriltagexperiments_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           ${CPPCHECK}
           --template=${CPPCHECK_TEMPLATE}
           --enable=style,performance,warning,portability
+          # catch2 macro breaks constexpr tests
+          --include="${CMAKE_CURRENT_BINARY_DIR}/_deps/catch2-src/src/"
           --inline-suppr
           # We cannot act on a bug/missing feature of cppcheck
           --suppress=cppcheckError
@@ -32,7 +34,7 @@ macro(apriltagexperiments_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --suppress=${SUPPRESS_DIR})
     else()
       # if the user provides a CPPCHECK_OPTIONS with a template specified, it will override this template
-      set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --template=${CPPCHECK_TEMPLATE} ${CPPCHECK_OPTIONS})
+      set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --template=${CPPCHECK_TEMPLATE} ${CPPCHECK_OPTIONS} --include="${CMAKE_CURRENT_BINARY_DIR}/_deps/catch2-src/src/")
     endif()
 
     if(NOT

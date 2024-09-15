@@ -85,7 +85,7 @@ jobs:
       # has meaningful results
     - name: Configure CMake
       run: |
-        cmake -S . -B ./build -G "${{matrix.generator}}" -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}} -D${{ env.PROJECT_NAME }}_PACKAGING_MAINTAINER_MODE:BOOL=${{matrix.packaging_maintainer_mode}} -D${{ env.PROJECT_NAME }}_ENABLE_COVERAGE:BOOL=${{ matrix.build_type == 'Debug' }}
+        cmake -S . -B ./out -G "${{matrix.generator}}" -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}} -D${{ env.PROJECT_NAME }}_PACKAGING_MAINTAINER_MODE:BOOL=${{matrix.packaging_maintainer_mode}} -D${{ env.PROJECT_NAME }}_ENABLE_COVERAGE:BOOL=${{ matrix.build_type == 'Debug' }}
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -101,7 +101,7 @@ jobs:
     - name: Build
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: |
-        cmake --build ./build --config ${{matrix.build_type}}
+        cmake --build ./out --config ${{matrix.build_type}}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
